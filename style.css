@@ -1,585 +1,288 @@
-/* =========================================================
-   CONTACT QUICK EDITOR
-   Zoho CRM Widget Styles
-   ========================================================= */
-
-
-/* =========================================================
+/* ========================================================
    GLOBAL
-   ========================================================= */
+======================================================== */
 
 * {
     box-sizing: border-box;
 }
 
-html,
 body {
     margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-}
-
-body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
     background: #f5f7fa;
     color: #1f2937;
-
     font-size: 14px;
 }
 
 
-/* =========================================================
-   MAIN WIDGET CONTAINER
-   ========================================================= */
-
-.widget-container {
-    width: 100%;
-    max-width: 900px;
-
-    margin: 0 auto;
-    padding: 20px;
-}
-
-
-/* =========================================================
-   HEADER
-   ========================================================= */
-
-.widget-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 18px;
-}
-
-.widget-header h1 {
-    margin: 0;
-
-    color: #111827;
-
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.3;
-}
-
-.widget-header p {
-    margin: 5px 0 0;
-
-    color: #6b7280;
-
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   CARD
-   ========================================================= */
+/* ========================================================
+   CARD / SECTION
+======================================================== */
 
 .card {
-    width: 100%;
-
-    margin-bottom: 16px;
-    padding: 20px;
-
     background: #ffffff;
-
-    border: 1px solid #e5e7eb;
+    border: 1px solid #e1e5ea;
     border-radius: 10px;
-
-    box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.04);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
+.card h2,
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+    color: #172033;
+}
 
-/* =========================================================
-   SECTION HEADER
-   ========================================================= */
-
-.section-header {
+.card p {
+    margin-top: 0;
     margin-bottom: 18px;
-}
-
-.section-header h2 {
-    margin: 0;
-
-    color: #111827;
-
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-.section-header p {
-    margin: 4px 0 0;
-
-    color: #6b7280;
-
-    font-size: 12px;
-    line-height: 1.5;
+    color: #667085;
+    font-size: 13px;
 }
 
 
-/* =========================================================
+/* ========================================================
    FORM GRID
-   ========================================================= */
+======================================================== */
 
 .form-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 12px;
+    row-gap: 16px;
 }
 
 
-/* =========================================================
+/* ========================================================
    FORM GROUP
-   ========================================================= */
+======================================================== */
 
 .form-group {
     display: flex;
-
     flex-direction: column;
-
-    min-width: 0;
 }
-
-
-/* =========================================================
-   LABEL
-   ========================================================= */
 
 .form-group label {
     margin-bottom: 6px;
-
-    color: #374151;
-
     font-size: 12px;
     font-weight: 600;
+    color: #344054;
+}
 
-    line-height: 1.4;
+.form-group label::after {
+    content: "";
 }
 
 
-/* Required indicator */
+/* ========================================================
+   INPUTS
+======================================================== */
 
-.required {
-    margin-left: 2px;
-
-    color: #dc2626;
-}
-
-
-/* =========================================================
-   INPUT
-   ========================================================= */
-
-.form-group input {
+input,
+textarea,
+select {
     width: 100%;
-    height: 38px;
-
-    padding: 8px 10px;
-
-    background: #ffffff;
-
-    border: 1px solid #d1d5db;
+    min-height: 38px;
+    padding: 9px 11px;
+    border: 1px solid #cfd5dd;
     border-radius: 6px;
-
-    color: #111827;
-
-    font-family: inherit;
+    background: #ffffff;
+    color: #1d2939;
     font-size: 13px;
-
     outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
 
-    transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease,
-        background-color 0.15s ease;
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #2f6fed;
+    box-shadow: 0 0 0 2px rgba(47, 111, 237, 0.12);
 }
 
 
-/* Placeholder */
-
-.form-group input::placeholder {
-    color: #9ca3af;
-}
-
-
-/* Focus */
-
-.form-group input:focus {
-    border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 2px rgba(37, 99, 235, 0.10);
-}
-
-
-/* Invalid input */
-
-.form-group input:invalid:not(:placeholder-shown) {
-    border-color: #ef4444;
-}
-
-
-/* Disabled */
-
-.form-group input:disabled {
-    background: #f9fafb;
-
-    color: #6b7280;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   FIELD HELP
-   ========================================================= */
-
-.field-help {
-    margin-top: 5px;
-
-    color: #9ca3af;
-
-    font-size: 11px;
-    line-height: 1.4;
-}
-
-
-/* =========================================================
-   FULL WIDTH FIELD
-   ========================================================= */
+/* ========================================================
+   FULL WIDTH FORM FIELD
+======================================================== */
 
 .full-width {
     grid-column: 1 / -1;
 }
 
 
-/* =========================================================
-   POSTAL CODE ROW
-   ========================================================= */
+/* ========================================================
+   BUTTON AREA
+======================================================== */
 
-.postal-row {
+.form-actions {
+    margin-top: 20px;
     display: flex;
-
-    align-items: flex-end;
-
+    align-items: center;
     gap: 10px;
-
-    margin-bottom: 16px;
 }
 
 
-.postal-field {
-    flex: 1;
-}
-
-
-/* =========================================================
+/* ========================================================
    BUTTONS
-   ========================================================= */
+======================================================== */
 
 button {
-    height: 38px;
-
-    padding: 0 16px;
-
+    min-height: 36px;
+    padding: 8px 14px;
+    border: none;
     border-radius: 6px;
-
-    font-family: inherit;
-
+    background: #2563eb;
+    color: #ffffff;
     font-size: 13px;
     font-weight: 600;
-
     cursor: pointer;
-
-    outline: none;
-
-    transition:
-        background-color 0.15s ease,
-        border-color 0.15s ease,
-        opacity 0.15s ease,
-        transform 0.05s ease;
+    transition: background 0.2s ease,
+                transform 0.1s ease,
+                opacity 0.2s ease;
 }
 
-
-/* Prevent text selection */
-
-button {
-    user-select: none;
-}
-
-
-/* =========================================================
-   PRIMARY BUTTON
-   ========================================================= */
-
-.primary-button {
-    background: #2563eb;
-
-    border: 1px solid #2563eb;
-
-    color: #ffffff;
-}
-
-
-.primary-button:hover {
+button:hover {
     background: #1d4ed8;
-
-    border-color: #1d4ed8;
 }
 
-
-.primary-button:active {
+button:active {
     transform: translateY(1px);
 }
-
-
-/* =========================================================
-   SECONDARY BUTTON
-   ========================================================= */
-
-.secondary-button {
-    background: #ffffff;
-
-    border: 1px solid #2563eb;
-
-    color: #2563eb;
-}
-
-
-.secondary-button:hover {
-    background: #eff6ff;
-}
-
-
-.secondary-button:active {
-    transform: translateY(1px);
-}
-
-
-/* =========================================================
-   BUTTON DISABLED
-   ========================================================= */
 
 button:disabled {
-    opacity: 0.55;
-
+    opacity: 0.6;
     cursor: not-allowed;
 }
 
 
-button:disabled:active {
-    transform: none;
+/* ========================================================
+   SAVE CONTACT BUTTON
+======================================================== */
+
+#saveContactBtn {
+    margin-top: 4px;
 }
 
 
-/* =========================================================
-   LOOKUP BUTTON
-   ========================================================= */
+/* ========================================================
+   POSTAL CODE / LOOKUP
+======================================================== */
 
 .lookup-button {
-    flex-shrink: 0;
-
-    min-width: 90px;
+    margin-top: 12px;
+    margin-bottom: 24px;
 }
 
 
-/* =========================================================
-   FORM ACTIONS
-   ========================================================= */
+/* ========================================================
+   ADDRESS SECTION
+======================================================== */
 
-.form-actions {
-    display: flex;
-
-    align-items: center;
-    justify-content: flex-end;
-
-    margin-top: 20px;
+.address-section {
+    margin-top: 10px;
 }
 
 
-/* =========================================================
-   LOADING STATE
-   ========================================================= */
+/* ========================================================
+   STREET ADDRESS
+======================================================== */
 
-.loading-state {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    min-height: 180px;
-
-    color: #6b7280;
-
-    font-size: 13px;
+#streetAddress {
+    margin-top: 0;
 }
 
 
-/* =========================================================
-   LOADING SPINNER
-   ========================================================= */
+/* ========================================================
+   CITY / STATE / COUNTRY
+======================================================== */
 
-.loading-spinner {
-    width: 18px;
-    height: 18px;
-
-    border: 2px solid #e5e7eb;
-    border-top-color: #2563eb;
-
-    border-radius: 50%;
-
-    animation:
-        spin 0.8s linear infinite;
+.address-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
 }
 
 
-@keyframes spin {
+/* ========================================================
+   SAVE ADDRESS BUTTON
+======================================================== */
 
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-
+#saveAddressBtn {
+    margin-top: 22px;
 }
 
 
-/* =========================================================
+/* ========================================================
    STATUS MESSAGE
-   ========================================================= */
+======================================================== */
 
 .status-message {
-    width: 100%;
-
-    margin-top: 4px;
+    margin-top: 15px;
     padding: 10px 12px;
-
-    background: #ecfdf5;
-
-    border: 1px solid #a7f3d0;
     border-radius: 6px;
-
-    color: #065f46;
-
     font-size: 13px;
-    line-height: 1.4;
+    display: none;
 }
 
-
-/* =========================================================
-   ERROR STATUS
-   ========================================================= */
+.status-message.success {
+    display: block;
+    background: #ecfdf3;
+    border: 1px solid #abefc6;
+    color: #067647;
+}
 
 .status-message.error {
-    background: #fef2f2;
+    display: block;
+    background: #fef3f2;
+    border: 1px solid #fecdca;
+    color: #b42318;
+}
 
-    border-color: #fecaca;
-
-    color: #991b1b;
+.status-message.info {
+    display: block;
+    background: #eff8ff;
+    border: 1px solid #b2ddff;
+    color: #175cd3;
 }
 
 
-/* =========================================================
-   HIDDEN
-   ========================================================= */
+/* ========================================================
+   RESPONSIVE DESIGN
+======================================================== */
 
-.hidden {
-    display: none !important;
-}
+@media (max-width: 700px) {
 
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width: 650px) {
-
-    .widget-container {
-        padding: 14px;
+    body {
+        padding: 12px;
     }
 
-
-    .widget-header h1 {
-        font-size: 20px;
+    .card {
+        padding: 16px;
     }
-
 
     .form-grid {
         grid-template-columns: 1fr;
     }
 
-
     .full-width {
         grid-column: auto;
     }
 
-
-    .postal-row {
-        flex-direction: column;
-
-        align-items: stretch;
+    .address-grid {
+        grid-template-columns: 1fr;
     }
-
-
-    .postal-field {
-        width: 100%;
-    }
-
 
     .lookup-button {
-        width: 100%;
+        margin-top: 12px;
+        margin-bottom: 20px;
     }
 
-
-    .form-actions {
-        justify-content: stretch;
+    #saveAddressBtn {
+        margin-top: 18px;
     }
-
-
-    .form-actions button {
-        width: 100%;
-    }
-
-}
-
-
-/* =========================================================
-   VERY SMALL SCREENS
-   ========================================================= */
-
-@media (max-width: 400px) {
-
-    .widget-container {
-        padding: 10px;
-    }
-
-
-    .card {
-        padding: 15px;
-    }
-
-
-    .widget-header h1 {
-        font-size: 18px;
-    }
-
 }
