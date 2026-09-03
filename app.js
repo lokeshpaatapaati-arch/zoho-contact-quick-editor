@@ -611,12 +611,6 @@ saveContactButton.addEventListener(
             );
 
 
-            // Browser popup
-            alert(
-                "Contact information saved successfully."
-            );
-
-
             console.log(
                 "Contact saved and verified successfully."
             );
