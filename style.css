@@ -17,28 +17,28 @@ body {
 
 
 /* ========================================================
-   CARD / SECTION
+   CARD
 ======================================================== */
 
 .card {
     background: #ffffff;
     border: 1px solid #e1e5ea;
     border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 22px;
+    margin-bottom: 24px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .card h2,
 .card h3 {
     margin-top: 0;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
     color: #172033;
 }
 
 .card p {
     margin-top: 0;
-    margin-bottom: 18px;
+    margin-bottom: 22px;
     color: #667085;
     font-size: 13px;
 }
@@ -51,8 +51,8 @@ body {
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 12px;
-    row-gap: 16px;
+    column-gap: 14px;
+    row-gap: 18px;
 }
 
 
@@ -66,14 +66,10 @@ body {
 }
 
 .form-group label {
-    margin-bottom: 6px;
+    margin-bottom: 7px;
     font-size: 12px;
     font-weight: 600;
     color: #344054;
-}
-
-.form-group label::after {
-    content: "";
 }
 
 
@@ -85,7 +81,7 @@ input,
 textarea,
 select {
     width: 100%;
-    min-height: 38px;
+    min-height: 40px;
     padding: 9px 11px;
     border: 1px solid #cfd5dd;
     border-radius: 6px;
@@ -106,7 +102,7 @@ select:focus {
 
 
 /* ========================================================
-   FULL WIDTH FORM FIELD
+   FULL WIDTH
 ======================================================== */
 
 .full-width {
@@ -115,24 +111,12 @@ select:focus {
 
 
 /* ========================================================
-   BUTTON AREA
-======================================================== */
-
-.form-actions {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-
-/* ========================================================
    BUTTONS
 ======================================================== */
 
 button {
-    min-height: 36px;
-    padding: 8px 14px;
+    min-height: 38px;
+    padding: 9px 16px;
     border: none;
     border-radius: 6px;
     background: #2563eb;
@@ -160,30 +144,37 @@ button:disabled {
 
 
 /* ========================================================
-   SAVE CONTACT BUTTON
+   SAVE CONTACT
+   Space ABOVE the button
 ======================================================== */
 
 #saveContactBtn {
-    margin-top: 4px;
+    display: block;
+
+    margin-top: 30px;
 }
 
 
 /* ========================================================
-   POSTAL CODE / LOOKUP
+   POSTAL CODE
 ======================================================== */
 
-.lookup-button {
-    margin-top: 12px;
-    margin-bottom: 24px;
+#postalCode {
+    margin-bottom: 0;
 }
 
 
 /* ========================================================
-   ADDRESS SECTION
+   LOOKUP BUTTON
+   Space ABOVE and BELOW the button
 ======================================================== */
 
-.address-section {
-    margin-top: 10px;
+#lookupAddressBtn {
+    display: block;
+
+    margin-top: 25px;
+
+    margin-bottom: 35px;
 }
 
 
@@ -197,23 +188,42 @@ button:disabled {
 
 
 /* ========================================================
-   CITY / STATE / COUNTRY
+   ADDRESS GRID
 ======================================================== */
 
 .address-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-top: 16px;
+    gap: 14px;
+
+    margin-top: 22px;
 }
 
 
 /* ========================================================
-   SAVE ADDRESS BUTTON
+   SAVE ADDRESS
+   Space ABOVE the button
 ======================================================== */
 
 #saveAddressBtn {
-    margin-top: 22px;
+    display: block;
+
+    margin-top: 35px;
+
+    margin-bottom: 5px;
+}
+
+
+/* ========================================================
+   FORM ACTIONS
+======================================================== */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 30px;
 }
 
 
@@ -222,8 +232,8 @@ button:disabled {
 ======================================================== */
 
 .status-message {
-    margin-top: 15px;
-    padding: 10px 12px;
+    margin-top: 18px;
+    padding: 11px 13px;
     border-radius: 6px;
     font-size: 13px;
     display: none;
@@ -252,7 +262,7 @@ button:disabled {
 
 
 /* ========================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ======================================================== */
 
 @media (max-width: 700px) {
@@ -277,12 +287,16 @@ button:disabled {
         grid-template-columns: 1fr;
     }
 
-    .lookup-button {
-        margin-top: 12px;
-        margin-bottom: 20px;
+    #saveContactBtn {
+        margin-top: 25px;
+    }
+
+    #lookupAddressBtn {
+        margin-top: 20px;
+        margin-bottom: 28px;
     }
 
     #saveAddressBtn {
-        margin-top: 18px;
+        margin-top: 28px;
     }
 }
