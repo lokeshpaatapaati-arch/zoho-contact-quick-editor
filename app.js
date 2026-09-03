@@ -165,7 +165,16 @@ ZOHO.embeddedApp.on("PageLoad", function (data) {
     // Store Contact ID
     // --------------------------------------------------------
 
-    contactId = data.EntityId[0];
+    let contactId = data.EntityId;
+
+if (Array.isArray(contactId)) {
+    contactId = contactId[0];
+}
+
+contactId = String(contactId);
+
+console.log("Current Contact ID:", contactId);
+loadContact(contactId);
 
     console.log(
         "Current Contact ID:",
