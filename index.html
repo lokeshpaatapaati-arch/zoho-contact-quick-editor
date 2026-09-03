@@ -6,84 +6,56 @@
 
     <title>Contact Quick Editor</title>
 
-    <!-- Widget CSS -->
-    <link rel="stylesheet" href="style.css">
-
     <!-- Zoho CRM Embedded App SDK -->
-    <script src="https://static.zohocdn.com/crm/sdk/1.0/ZohoEmbededAppSDK.min.js"></script>
+    <script src="https://live.zwidgets.com/js-sdk/1.2/ZohoEmbededAppSDK.min.js"></script>
+
+    <!-- Widget Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <div class="widget-container">
 
-        <!-- ================================
-             WIDGET HEADER
-        ================================= -->
-
-        <header class="widget-header">
-
-            <div>
-                <h1>Contact Quick Editor</h1>
-
-                <p>
-                    View and update contact information
-                </p>
-            </div>
-
-        </header>
-
-
-        <!-- ================================
-             LOADING STATE
-        ================================= -->
-
+        <!-- Loading State -->
         <div id="loadingState" class="loading-state">
-
-            <div class="loading-spinner"></div>
-
-            <span>
-                Loading contact information...
-            </span>
-
+            <div class="spinner"></div>
+            <p>Loading contact information...</p>
         </div>
 
 
-        <!-- ================================
-             MAIN CONTENT
-        ================================= -->
+        <!-- Main Widget -->
+        <div id="mainContent" class="hidden">
 
-        <main id="mainContent" class="hidden">
+            <!-- Header -->
+            <div class="widget-header">
+                <div>
+                    <h1>Contact Quick Editor</h1>
+                    <p>View and update Contact information</p>
+                </div>
+            </div>
 
 
-            <!-- ================================
-                 CONTACT INFORMATION SECTION
-            ================================= -->
+            <!-- Status Message -->
+            <div id="statusMessage" class="status-message info">
+                Ready
+            </div>
 
+
+            <!-- Contact Information -->
             <section class="card">
 
                 <div class="section-header">
-
                     <div>
-
                         <h2>Contact Information</h2>
-
-                        <p>
-                            Update the contact's core details.
-                        </p>
-
+                        <p>Edit the Contact details below.</p>
                     </div>
-
                 </div>
-
 
                 <div class="form-grid">
 
-
                     <!-- First Name -->
-
                     <div class="form-group">
-
                         <label for="firstName">
                             First Name
                         </label>
@@ -91,18 +63,13 @@
                         <input
                             type="text"
                             id="firstName"
-                            name="firstName"
-                            placeholder="Enter first name"
-                            autocomplete="given-name"
+                            placeholder="First Name"
                         >
-
                     </div>
 
 
                     <!-- Last Name -->
-
                     <div class="form-group">
-
                         <label for="lastName">
                             Last Name
                             <span class="required">*</span>
@@ -111,19 +78,14 @@
                         <input
                             type="text"
                             id="lastName"
-                            name="lastName"
-                            placeholder="Enter last name"
-                            autocomplete="family-name"
+                            placeholder="Last Name"
                             required
                         >
-
                     </div>
 
 
                     <!-- Phone -->
-
                     <div class="form-group">
-
                         <label for="phone">
                             Phone
                         </label>
@@ -131,18 +93,13 @@
                         <input
                             type="tel"
                             id="phone"
-                            name="phone"
-                            placeholder="Enter phone number"
-                            autocomplete="tel"
+                            placeholder="Phone number"
                         >
-
                     </div>
 
 
                     <!-- Email -->
-
                     <div class="form-group">
-
                         <label for="email">
                             Email
                         </label>
@@ -150,95 +107,71 @@
                         <input
                             type="email"
                             id="email"
-                            name="email"
-                            placeholder="Enter email address"
-                            autocomplete="email"
+                            placeholder="Email address"
                         >
-
                     </div>
 
                 </div>
 
 
-                <!-- Contact Save -->
-
-                <div class="form-actions">
-
+                <div class="button-row">
                     <button
                         type="button"
                         id="saveContactBtn"
                         class="primary-button"
                     >
-                        Save Changes
+                        Save Contact
                     </button>
-
                 </div>
 
             </section>
 
 
-
-            <!-- ================================
-                 ADDRESS SECTION
-            ================================= -->
-
+            <!-- Address -->
             <section class="card">
 
                 <div class="section-header">
-
                     <div>
-
-                        <h2>Address</h2>
-
+                        <h2>Mailing Address</h2>
                         <p>
-                            Enter a postal code to automatically
-                            find location details.
+                            Enter a U.S. ZIP code to automatically find
+                            city, state and country.
                         </p>
-
                     </div>
-
                 </div>
 
 
-                <!-- Postal Code Lookup -->
+                <div class="form-grid">
 
-                <div class="postal-row">
-
-                    <div class="form-group postal-field">
+                    <!-- Postal Code -->
+                    <div class="form-group postal-group">
 
                         <label for="postalCode">
                             Postal Code
                         </label>
 
-                        <input
-                            type="text"
-                            id="postalCode"
-                            name="postalCode"
-                            placeholder="Enter postal code"
-                            autocomplete="postal-code"
-                        >
+                        <div class="postal-input-row">
+
+                            <input
+                                type="text"
+                                id="postalCode"
+                                placeholder="e.g. 10001"
+                            >
+
+                            <button
+                                type="button"
+                                id="lookupAddressBtn"
+                                class="secondary-button lookup-button"
+                            >
+                                Lookup
+                            </button>
+
+                        </div>
 
                     </div>
 
 
-                    <button
-                        type="button"
-                        id="lookupAddressBtn"
-                        class="secondary-button"
-                    >
-                        Lookup
-                    </button>
-
-                </div>
-
-
-                <!-- Address Fields -->
-
-                <div class="form-grid">
-
-
-                    <!-- Street Address -->
-
+                    <!-- Street -->
                     <div class="form-group full-width">
 
                         <label for="streetAddress">
@@ -248,20 +181,13 @@
                         <input
                             type="text"
                             id="streetAddress"
-                            name="streetAddress"
                             placeholder="Enter street address"
-                            autocomplete="street-address"
                         >
-
-                        <span class="field-help">
-                            Street address must be entered manually.
-                        </span>
 
                     </div>
 
 
                     <!-- City -->
-
                     <div class="form-group">
 
                         <label for="city">
@@ -271,16 +197,13 @@
                         <input
                             type="text"
                             id="city"
-                            name="city"
                             placeholder="City"
-                            autocomplete="address-level2"
                         >
 
                     </div>
 
 
-                    <!-- State / Province -->
-
+                    <!-- State -->
                     <div class="form-group">
 
                         <label for="state">
@@ -290,16 +213,13 @@
                         <input
                             type="text"
                             id="state"
-                            name="state"
-                            placeholder="State / Province"
-                            autocomplete="address-level1"
+                            placeholder="State"
                         >
 
                     </div>
 
 
                     <!-- Country -->
-
                     <div class="form-group">
 
                         <label for="country">
@@ -309,9 +229,7 @@
                         <input
                             type="text"
                             id="country"
-                            name="country"
                             placeholder="Country"
-                            autocomplete="country-name"
                         >
 
                     </div>
@@ -319,9 +237,7 @@
                 </div>
 
 
-                <!-- Address Save -->
-
-                <div class="form-actions">
+                <div class="button-row">
 
                     <button
                         type="button"
@@ -335,27 +251,12 @@
 
             </section>
 
-
-        </main>
-
-
-        <!-- ================================
-             STATUS MESSAGE
-        ================================= -->
-
-        <div
-            id="statusMessage"
-            class="status-message hidden"
-            role="alert"
-            aria-live="polite"
-        ></div>
-
+        </div>
 
     </div>
 
 
     <!-- Widget JavaScript -->
-
     <script src="app.js"></script>
 
 </body>
