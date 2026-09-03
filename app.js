@@ -1,9 +1,12 @@
 // ============================================================
-// Zoho CRM Contact Quick Editor
-// File: app.js
+// ZOHO CRM CONTACT QUICK EDITOR
 // ============================================================
 
-// Stores the ID of the Contact currently open in Zoho CRM
+
+// ============================================================
+// GLOBAL CONTACT ID
+// ============================================================
+
 let contactId = null;
 
 
@@ -25,74 +28,108 @@ const cityInput = document.getElementById("city");
 const stateInput = document.getElementById("state");
 const countryInput = document.getElementById("country");
 
-const saveContactButton = document.getElementById("saveContactBtn");
-const lookupAddressButton = document.getElementById("lookupAddressBtn");
-const saveAddressButton = document.getElementById("saveAddressBtn");
+const saveContactButton =
+    document.getElementById("saveContactBtn");
 
-const statusMessage = document.getElementById("statusMessage");
+const lookupAddressButton =
+    document.getElementById("lookupAddressBtn");
+
+const saveAddressButton =
+    document.getElementById("saveAddressBtn");
+
+const statusMessage =
+    document.getElementById("statusMessage");
 
 
 // ============================================================
-// HELPER FUNCTIONS
+// STATUS MESSAGE
 // ============================================================
 
-/**
- * Display a status message to the user.
- */
 function showStatus(message, type = "success") {
+
+    if (!statusMessage) {
+        return;
+    }
 
     statusMessage.textContent = message;
 
     statusMessage.className = "status-message";
 
     if (type === "error") {
+
         statusMessage.classList.add("error");
+
     }
-    else if (type === "success") {
-        statusMessage.classList.add("success");
+    else if (type === "info") {
+
+        statusMessage.classList.add("info");
+
     }
     else {
-        statusMessage.classList.add("info");
+
+        statusMessage.classList.add("success");
+
     }
 }
 
 
-/**
- * Show the main widget and hide loading screen.
- */
+// ============================================================
+// SHOW MAIN CONTENT
+// ============================================================
+
 function showMainContent() {
 
-    loadingState.classList.add("hidden");
+    if (loadingState) {
+        loadingState.classList.add("hidden");
+    }
 
-    mainContent.classList.remove("hidden");
+    if (mainContent) {
+        mainContent.classList.remove("hidden");
+    }
 }
 
 
-/**
- * Show loading error.
- */
+// ============================================================
+// SHOW LOADING ERROR
+// ============================================================
+
 function showLoadingError(message) {
 
-    loadingState.textContent = message;
+    if (loadingState) {
 
-    loadingState.classList.remove("hidden");
+        loadingState.textContent = message;
 
-    mainContent.classList.add("hidden");
+        loadingState.classList.remove("hidden");
+    }
+
+    if (mainContent) {
+        mainContent.classList.add("hidden");
+    }
 
     showStatus(message, "error");
 }
 
 
-/**
- * Disable a button while an operation is running.
- */
-function setButtonLoading(button, loading, loadingText = "Saving...") {
+// ============================================================
+// BUTTON LOADING STATE
+// ============================================================
+
+function setButtonLoading(
+    button,
+    loading,
+    loadingText = "Saving..."
+) {
+
+    if (!button) {
+        return;
+    }
 
     if (loading) {
 
         button.disabled = true;
 
-        button.dataset.originalText = button.textContent;
+        button.dataset.originalText =
+            button.textContent;
 
         button.textContent = loadingText;
 
@@ -103,7 +140,8 @@ function setButtonLoading(button, loading, loadingText = "Saving...") {
 
         if (button.dataset.originalText) {
 
-            button.textContent = button.dataset.originalText;
+            button.textContent =
+                button.dataset.originalText;
 
         }
     }
@@ -111,12 +149,169 @@ function setButtonLoading(button, loading, loadingText = "Saving...") {
 
 
 // ============================================================
-// CHECK ZOHO SDK
+// SAVE CONTACT ID
+// ============================================================
+
+function setContactId(id) {
+
+    if (
+        id === null ||
+        id === undefined ||
+        id === ""
+    ) {
+
+        console.error(
+            "Attempted to save an invalid Contact ID:",
+            id
+        );
+
+        return false;
+    }
+
+
+    // Convert to string
+
+    const normalizedId = String(id);
+
+
+    // Global variable
+
+    contactId = normalizedId;
+
+
+    // Window-level variable
+
+    window.currentContactId = normalizedId;
+
+
+    // Session storage backup
+
+    try {
+
+        sessionStorage.setItem(
+            "zohoContactId",
+            normalizedId
+        );
+
+    }
+    catch (error) {
+
+        console.warn(
+            "Unable to save Contact ID to sessionStorage:",
+            error
+        );
+
+    }
+
+
+    console.log(
+        "Contact ID stored successfully:",
+        normalizedId
+    );
+
+
+    return true;
+}
+
+
+// ============================================================
+// GET CONTACT ID
+// ============================================================
+
+function getContactId() {
+
+    // --------------------------------------------------------
+    // 1. Global variable
+    // --------------------------------------------------------
+
+    if (
+        contactId !== null &&
+        contactId !== undefined &&
+        contactId !== ""
+    ) {
+
+        return String(contactId);
+
+    }
+
+
+    // --------------------------------------------------------
+    // 2. Window variable
+    // --------------------------------------------------------
+
+    if (
+        window.currentContactId !== null &&
+        window.currentContactId !== undefined &&
+        window.currentContactId !== ""
+    ) {
+
+        contactId =
+            String(window.currentContactId);
+
+        return contactId;
+
+    }
+
+
+    // --------------------------------------------------------
+    // 3. Session storage
+    // --------------------------------------------------------
+
+    try {
+
+        const storedId =
+            sessionStorage.getItem(
+                "zohoContactId"
+            );
+
+
+        if (
+            storedId !== null &&
+            storedId !== ""
+        ) {
+
+            contactId = String(storedId);
+
+            window.currentContactId =
+                contactId;
+
+            console.log(
+                "Contact ID restored from sessionStorage:",
+                contactId
+            );
+
+            return contactId;
+
+        }
+
+    }
+    catch (error) {
+
+        console.warn(
+            "Unable to read Contact ID from sessionStorage:",
+            error
+        );
+
+    }
+
+
+    // --------------------------------------------------------
+    // No ID available
+    // --------------------------------------------------------
+
+    return null;
+}
+
+
+// ============================================================
+// ZOHO SDK CHECK
 // ============================================================
 
 if (typeof ZOHO === "undefined") {
 
-    console.error("Zoho Embedded App SDK is not available.");
+    console.error(
+        "Zoho Embedded App SDK is not available."
+    );
 
     showLoadingError(
         "Zoho CRM SDK could not be loaded. Please refresh the Contact record."
@@ -125,100 +320,140 @@ if (typeof ZOHO === "undefined") {
 }
 else {
 
+
     // ========================================================
-    // ZOHO CRM PAGE LOAD
+    // ZOHO PAGE LOAD
     // ========================================================
 
-    ZOHO.embeddedApp.on("PageLoad", function (data) {
+    ZOHO.embeddedApp.on(
+        "PageLoad",
+        function (data) {
 
-        console.log("Zoho CRM PageLoad data:", data);
-
-
-        // ----------------------------------------------------
-        // Validate PageLoad data
-        // ----------------------------------------------------
-
-        if (
-            !data ||
-            !data.EntityId
-        ) {
-
-            showLoadingError(
-                "Unable to identify the Contact record."
+            console.log(
+                "================================================"
             );
 
-            console.error(
-                "PageLoad did not provide EntityId:",
+            console.log(
+                "Zoho CRM PageLoad event received."
+            );
+
+            console.log(
+                "PageLoad data:",
                 data
             );
 
-            return;
-        }
+
+            // ------------------------------------------------
+            // Validate PageLoad data
+            // ------------------------------------------------
+
+            if (
+                !data ||
+                !data.EntityId
+            ) {
+
+                console.error(
+                    "PageLoad did not provide EntityId."
+                );
+
+                showLoadingError(
+                    "Unable to identify the Contact record."
+                );
+
+                return;
+            }
 
 
-        // ----------------------------------------------------
-        // Get the Contact ID
-        //
-        // Zoho may provide EntityId as:
-        //
-        // 1. A string
-        //    "1249296000001234567"
-        //
-        // 2. An array
-        //    ["1249296000001234567"]
-        //
-        // ----------------------------------------------------
+            // ------------------------------------------------
+            // Extract Contact ID
+            // ------------------------------------------------
 
-        let pageLoadContactId = data.EntityId;
+            let receivedContactId =
+                data.EntityId;
 
 
-        if (Array.isArray(pageLoadContactId)) {
-
-            pageLoadContactId = pageLoadContactId[0];
-
-        }
-
-
-        // Make sure the ID is converted to a string
-
-        if (
-            pageLoadContactId === null ||
-            pageLoadContactId === undefined ||
-            pageLoadContactId === ""
-        ) {
-
-            showLoadingError(
-                "Contact ID is not available."
+            console.log(
+                "Raw EntityId:",
+                receivedContactId
             );
 
-            console.error(
-                "Invalid Contact ID:",
-                pageLoadContactId
+
+            // ------------------------------------------------
+            // Handle array format
+            // ------------------------------------------------
+
+            if (
+                Array.isArray(receivedContactId)
+            ) {
+
+                receivedContactId =
+                    receivedContactId[0];
+
+            }
+
+
+            // ------------------------------------------------
+            // Validate extracted ID
+            // ------------------------------------------------
+
+            if (
+                receivedContactId === null ||
+                receivedContactId === undefined ||
+                receivedContactId === ""
+            ) {
+
+                console.error(
+                    "Extracted Contact ID is empty."
+                );
+
+                showLoadingError(
+                    "Contact ID is not available."
+                );
+
+                return;
+            }
+
+
+            // ------------------------------------------------
+            // Store Contact ID
+            // ------------------------------------------------
+
+            const idSaved =
+                setContactId(
+                    receivedContactId
+                );
+
+
+            if (!idSaved) {
+
+                showLoadingError(
+                    "Unable to store Contact ID."
+                );
+
+                return;
+            }
+
+
+            // ------------------------------------------------
+            // Confirm stored ID
+            // ------------------------------------------------
+
+            console.log(
+                "Current Contact ID:",
+                getContactId()
             );
 
-            return;
+
+            // ------------------------------------------------
+            // Load Contact
+            // ------------------------------------------------
+
+            loadContact(
+                getContactId()
+            );
+
         }
-
-
-        // Store the Contact ID globally
-        // so Save Contact and Save Address can use it.
-
-        contactId = String(pageLoadContactId);
-
-
-        console.log(
-            "Current Contact ID:",
-            contactId
-        );
-
-
-        // ----------------------------------------------------
-        // Load the Contact information
-        // ----------------------------------------------------
-
-        loadContact(contactId);
-
-    });
+    );
 
 
     // ========================================================
@@ -285,7 +520,7 @@ else {
 
 
             // ------------------------------------------------
-            // Validate API response
+            // Validate response
             // ------------------------------------------------
 
             if (
@@ -294,14 +529,14 @@ else {
                 response.data.length === 0
             ) {
 
+                console.error(
+                    "No Contact record returned:",
+                    response
+                );
+
                 showStatus(
                     "Contact record could not be found.",
                     "error"
-                );
-
-                console.error(
-                    "No Contact data returned:",
-                    response
                 );
 
                 return;
@@ -309,14 +544,15 @@ else {
 
 
             // ------------------------------------------------
-            // Get Contact record
+            // Get Contact
             // ------------------------------------------------
 
-            const contact = response.data[0];
+            const contact =
+                response.data[0];
 
 
             console.log(
-                "Contact record:",
+                "Contact record loaded:",
                 contact
             );
 
@@ -339,7 +575,7 @@ else {
 
 
             // =================================================
-            // ADDRESS INFORMATION
+            // MAILING ADDRESS
             // =================================================
 
             postalCodeInput.value =
@@ -359,7 +595,7 @@ else {
 
 
             // ------------------------------------------------
-            // Show widget after data has loaded
+            // Show widget
             // ------------------------------------------------
 
             showMainContent();
@@ -377,29 +613,48 @@ else {
                 error
             );
 
-
             showStatus(
                 "Failed to load Contact information.",
                 "error"
             );
 
         });
+
     }
 
 
     // ========================================================
-    // SAVE CONTACT INFORMATION
+    // SAVE CONTACT
     // ========================================================
 
     saveContactButton.addEventListener(
         "click",
         function () {
 
+            console.log(
+                "Save Contact button clicked."
+            );
+
+
             // ------------------------------------------------
-            // Make sure Contact ID is available
+            // Get Contact ID
             // ------------------------------------------------
 
-            if (!contactId) {
+            const currentId =
+                getContactId();
+
+
+            console.log(
+                "Contact ID used for Save Contact:",
+                currentId
+            );
+
+
+            // ------------------------------------------------
+            // Validate Contact ID
+            // ------------------------------------------------
+
+            if (!currentId) {
 
                 showStatus(
                     "Contact ID is not available.",
@@ -407,7 +662,7 @@ else {
                 );
 
                 console.error(
-                    "Save Contact attempted without Contact ID."
+                    "Save Contact failed: Contact ID is empty."
                 );
 
                 return;
@@ -415,7 +670,7 @@ else {
 
 
             // ------------------------------------------------
-            // Validate Last Name
+            // Get field values
             // ------------------------------------------------
 
             const firstName =
@@ -431,6 +686,10 @@ else {
                 emailInput.value.trim();
 
 
+            // ------------------------------------------------
+            // Last Name validation
+            // ------------------------------------------------
+
             if (!lastName) {
 
                 showStatus(
@@ -445,7 +704,7 @@ else {
 
 
             // ------------------------------------------------
-            // Basic email validation
+            // Email validation
             // ------------------------------------------------
 
             if (
@@ -465,7 +724,7 @@ else {
 
 
             // ------------------------------------------------
-            // Show saving state
+            // Loading state
             // ------------------------------------------------
 
             setButtonLoading(
@@ -482,12 +741,12 @@ else {
 
 
             // ------------------------------------------------
-            // Contact data to update
+            // Contact data
             // ------------------------------------------------
 
             const contactData = {
 
-                id: contactId,
+                id: currentId,
 
                 First_Name: firstName,
 
@@ -501,13 +760,13 @@ else {
 
 
             console.log(
-                "Updating Contact with:",
+                "Contact update payload:",
                 contactData
             );
 
 
             // ------------------------------------------------
-            // Update Contact in Zoho CRM
+            // Update CRM
             // ------------------------------------------------
 
             ZOHO.CRM.API.updateRecord({
@@ -568,16 +827,12 @@ else {
         "click",
         function () {
 
-            // ------------------------------------------------
-            // Get postal code
-            // ------------------------------------------------
-
             const postalCode =
                 postalCodeInput.value.trim();
 
 
             // ------------------------------------------------
-            // Validate postal code
+            // Validate ZIP
             // ------------------------------------------------
 
             if (!postalCode) {
@@ -600,10 +855,11 @@ else {
 
 
             // ------------------------------------------------
-            // Show loading state
+            // Loading state
             // ------------------------------------------------
 
-            lookupAddressButton.disabled = true;
+            lookupAddressButton.disabled =
+                true;
 
             lookupAddressButton.textContent =
                 "Looking up...";
@@ -615,23 +871,15 @@ else {
             );
 
 
-            // =================================================
+            // ------------------------------------------------
             // Zippopotam.us API
-            //
-            // Free public postal code API
-            //
-            // This implementation uses US ZIP codes.
-            // =================================================
+            // ------------------------------------------------
 
             const apiUrl =
                 `https://api.zippopotam.us/us/${encodeURIComponent(postalCode)}`;
 
 
             fetch(apiUrl)
-
-                // ------------------------------------------------
-                // Check API response
-                // ------------------------------------------------
 
                 .then(function (response) {
 
@@ -646,11 +894,6 @@ else {
                     return response.json();
 
                 })
-
-
-                // ------------------------------------------------
-                // Process API response
-                // ------------------------------------------------
 
                 .then(function (data) {
 
@@ -676,15 +919,25 @@ else {
                         data.places[0];
 
 
-                    // =================================================
-                    // AUTO-FILL ADDRESS FIELDS
-                    // =================================================
+                    // ------------------------------------------------
+                    // Auto-fill city
+                    // ------------------------------------------------
 
                     cityInput.value =
                         place["place name"] || "";
 
+
+                    // ------------------------------------------------
+                    // Auto-fill state
+                    // ------------------------------------------------
+
                     stateInput.value =
                         place["state"] || "";
+
+
+                    // ------------------------------------------------
+                    // Auto-fill country
+                    // ------------------------------------------------
 
                     countryInput.value =
                         data.country || "";
@@ -696,11 +949,6 @@ else {
                     );
 
                 })
-
-
-                // ------------------------------------------------
-                // Handle lookup errors
-                // ------------------------------------------------
 
                 .catch(function (error) {
 
@@ -717,11 +965,6 @@ else {
                     );
 
                 })
-
-
-                // ------------------------------------------------
-                // Restore Lookup button
-                // ------------------------------------------------
 
                 .finally(function () {
 
@@ -745,11 +988,30 @@ else {
         "click",
         function () {
 
+            console.log(
+                "Save Address button clicked."
+            );
+
+
             // ------------------------------------------------
-            // Make sure Contact ID is available
+            // Get Contact ID
             // ------------------------------------------------
 
-            if (!contactId) {
+            const currentId =
+                getContactId();
+
+
+            console.log(
+                "Contact ID used for Save Address:",
+                currentId
+            );
+
+
+            // ------------------------------------------------
+            // Validate Contact ID
+            // ------------------------------------------------
+
+            if (!currentId) {
 
                 showStatus(
                     "Contact ID is not available.",
@@ -757,7 +1019,7 @@ else {
                 );
 
                 console.error(
-                    "Save Address attempted without Contact ID."
+                    "Save Address failed: Contact ID is empty."
                 );
 
                 return;
@@ -765,7 +1027,7 @@ else {
 
 
             // ------------------------------------------------
-            // Show saving state
+            // Loading state
             // ------------------------------------------------
 
             setButtonLoading(
@@ -787,7 +1049,7 @@ else {
 
             const addressData = {
 
-                id: contactId,
+                id: currentId,
 
                 Mailing_Street:
                     streetAddressInput.value.trim(),
@@ -808,13 +1070,13 @@ else {
 
 
             console.log(
-                "Updating address with:",
+                "Address update payload:",
                 addressData
             );
 
 
             // ------------------------------------------------
-            // Update Contact address in Zoho CRM
+            // Update CRM
             // ------------------------------------------------
 
             ZOHO.CRM.API.updateRecord({
