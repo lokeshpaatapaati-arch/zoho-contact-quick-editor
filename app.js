@@ -1186,10 +1186,7 @@ saveAddressButton.addEventListener(
             // SUCCESS
             // ------------------------------------------------
 
-            showStatus(
-                "Contact and address details saved successfully.",
-                "success"
-            );
+         
 
 
             console.log(
