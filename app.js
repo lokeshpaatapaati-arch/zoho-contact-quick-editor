@@ -1192,12 +1192,6 @@ saveAddressButton.addEventListener(
             );
 
 
-            // Browser popup
-            alert(
-                "Contact and address details saved successfully."
-            );
-
-
             console.log(
                 "Address saved and verified successfully."
             );
