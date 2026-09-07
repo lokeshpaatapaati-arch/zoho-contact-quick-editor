@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Contact Quick Editor</title>
 
@@ -10,254 +15,275 @@
     <script src="https://live.zwidgets.com/js-sdk/1.2/ZohoEmbededAppSDK.min.js"></script>
 
     <!-- Widget Styles -->
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 </head>
 
 <body>
 
-    <div class="widget-container">
-
-        <!-- Loading State -->
-        <div id="loadingState" class="loading-state">
-            <div class="spinner"></div>
-            <p>Loading contact information...</p>
-        </div>
-
-
-        <!-- Main Widget -->
-        <div id="mainContent" class="hidden">
-
-            <!-- Header -->
-            <div class="widget-header">
-                <div>
-                    <h1>Contact Quick Editor</h1>
-                    <p>View and update Contact information</p>
-                </div>
-            </div>
-
-
-            <!-- Status Message -->
-            <div id="statusMessage" class="status-message info">
-                Ready
-            </div>
-
-
-            <!-- Contact Information -->
-            <section class="card">
-
-                <div class="section-header">
-                    <div>
-                        <h2>Contact Information</h2>
-                        <p>Edit the Contact details below.</p>
-                    </div>
-                </div>
-
-                <div class="form-grid">
-
-                    <!-- First Name -->
-                    <div class="form-group">
-                        <label for="firstName">
-                            First Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="firstName"
-                            placeholder="First Name"
-                        >
-                    </div>
-
-
-                    <!-- Last Name -->
-                    <div class="form-group">
-                        <label for="lastName">
-                            Last Name
-                            <span class="required">*</span>
-                        </label>
-
-                        <input
-                            type="text"
-                            id="lastName"
-                            placeholder="Last Name"
-                            required
-                        >
-                    </div>
-
-
-                    <!-- Phone -->
-                    <div class="form-group">
-                        <label for="phone">
-                            Phone
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            placeholder="Phone number"
-                        >
-                    </div>
-
-
-                    <!-- Email -->
-                    <div class="form-group">
-                        <label for="email">
-                            Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Email address"
-                        >
-                    </div>
-
-                </div>
-
-
-                <div class="button-row">
-                    <button
-                        type="button"
-                        id="saveContactBtn"
-                        class="primary-button"
-                    >
-                        Save Contact
-                    </button>
-                </div>
-
-            </section>
-
-
-            <!-- Address -->
-            <section class="card">
-
-                <div class="section-header">
-                    <div>
-                        <h2>Mailing Address</h2>
-                        <p>
-                            Enter a U.S. ZIP code to automatically find
-                            city, state and country.
-                        </p>
-                    </div>
-                </div>
-
-
-                <div class="form-grid">
-
-                    <!-- Postal Code -->
-                    <div class="form-group postal-group">
-
-                        <label for="postalCode">
-                            Postal Code
-                        </label>
-
-                        <div class="postal-input-row">
-
-                            <input
-                                type="text"
-                                id="postalCode"
-                                placeholder="e.g. 10001"
-                            >
-
-                            <button
-                                type="button"
-                                id="lookupAddressBtn"
-                                class="secondary-button lookup-button"
-                            >
-                                Lookup
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- Street -->
-                    <div class="form-group full-width">
-
-                        <label for="streetAddress">
-                            Street Address
-                        </label>
-
-                        <input
-                            type="text"
-                            id="streetAddress"
-                            placeholder="Enter street address"
-                        >
-
-                    </div>
-
-
-                    <!-- City -->
-                    <div class="form-group">
-
-                        <label for="city">
-                            City
-                        </label>
-
-                        <input
-                            type="text"
-                            id="city"
-                            placeholder="City"
-                        >
-
-                    </div>
-
-
-                    <!-- State -->
-                    <div class="form-group">
-
-                        <label for="state">
-                            State / Province
-                        </label>
-
-                        <input
-                            type="text"
-                            id="state"
-                            placeholder="State"
-                        >
-
-                    </div>
-
-
-                    <!-- Country -->
-                    <div class="form-group">
-
-                        <label for="country">
-                            Country
-                        </label>
-
-                        <input
-                            type="text"
-                            id="country"
-                            placeholder="Country"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <div class="button-row">
-
-                    <button
-                        type="button"
-                        id="saveAddressBtn"
-                        class="primary-button"
-                    >
-                        Save Address
-                    </button>
-
-                </div>
-
-            </section>
-
-        </div>
+    <!-- =====================================================
+         PAGE HEADER
+    ====================================================== -->
+
+    <div class="page-header">
+
+        <h1>
+            Contact Quick Editor
+        </h1>
+
+        <p>
+            View and update Contact information
+        </p>
 
     </div>
 
 
-    <!-- Widget JavaScript -->
+    <!-- =====================================================
+         STATUS MESSAGE
+    ====================================================== -->
+
+    <div
+        id="statusMessage"
+        class="status-message"
+    >
+    </div>
+
+
+    <!-- =====================================================
+         CONTACT INFORMATION
+    ====================================================== -->
+
+    <div class="card">
+
+        <h2>
+            Contact Information
+        </h2>
+
+        <p>
+            Edit the Contact details below.
+        </p>
+
+
+        <div class="form-grid">
+
+            <!-- First Name -->
+
+            <div class="form-group">
+
+                <label for="firstName">
+                    First Name
+                </label>
+
+                <input
+                    type="text"
+                    id="firstName"
+                    placeholder="Enter first name"
+                >
+
+            </div>
+
+
+            <!-- Last Name -->
+
+            <div class="form-group">
+
+                <label for="lastName">
+                    Last Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="lastName"
+                    placeholder="Enter last name"
+                >
+
+            </div>
+
+
+            <!-- Phone -->
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter phone number"
+                >
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter email address"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Save Contact -->
+
+        <button
+            type="button"
+            id="saveContactBtn"
+        >
+            Save Contact
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAILING ADDRESS
+    ====================================================== -->
+
+    <div class="card">
+
+        <h2>
+            Mailing Address
+        </h2>
+
+        <p>
+            Enter a postal code to automatically find the
+            city, state and country.
+        </p>
+
+
+        <!-- Postal Code -->
+
+        <div class="form-group">
+
+            <label for="postalCode">
+                Postal Code
+            </label>
+
+            <input
+                type="text"
+                id="postalCode"
+                placeholder="Enter U.S. ZIP code"
+            >
+
+        </div>
+
+
+        <!-- Lookup Address -->
+
+        <button
+            type="button"
+            id="lookupAddressBtn"
+            class="secondary-button lookup-button"
+        >
+            Lookup Address
+        </button>
+
+
+        <!-- Address Fields -->
+
+        <div class="form-group">
+
+            <label for="streetAddress">
+                Street Address
+            </label>
+
+            <textarea
+                id="streetAddress"
+                rows="3"
+                placeholder="Enter street address"
+            ></textarea>
+
+        </div>
+
+
+        <div class="address-grid">
+
+            <!-- City -->
+
+            <div class="form-group">
+
+                <label for="city">
+                    City
+                </label>
+
+                <input
+                    type="text"
+                    id="city"
+                    placeholder="City"
+                >
+
+            </div>
+
+
+            <!-- State -->
+
+            <div class="form-group">
+
+                <label for="state">
+                    State / Province
+                </label>
+
+                <input
+                    type="text"
+                    id="state"
+                    placeholder="State / Province"
+                >
+
+            </div>
+
+
+            <!-- Country -->
+
+            <div class="form-group">
+
+                <label for="country">
+                    Country
+                </label>
+
+                <input
+                    type="text"
+                    id="country"
+                    placeholder="Country"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- Save Address -->
+
+        <button
+            type="button"
+            id="saveAddressBtn"
+        >
+            Save Address
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         APPLICATION JAVASCRIPT
+    ====================================================== -->
+
     <script src="app.js"></script>
 
 </body>
+
 </html>
