@@ -604,7 +604,10 @@ saveContactButton.addEventListener(
 
             }
 
-
+   showStatus(
+                "Contact and address details saved successfully.",
+                "success"
+            );
             showStatus(
                 "Contact information saved successfully.",
                 "success"
