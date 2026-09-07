@@ -50,10 +50,12 @@ function setContactId(id) {
 
     // Store in session storage as backup
     try {
+
         sessionStorage.setItem(
             "zohoContactId",
             normalizedId
         );
+
     }
     catch (error) {
 
@@ -129,7 +131,7 @@ function getContactId() {
 
 
 // --------------------------------------------------------
-// STATUS MESSAGE - IN WIDGET ALERT
+// IN-WIDGET STATUS MESSAGE
 // --------------------------------------------------------
 
 function showStatus(message, type) {
@@ -305,6 +307,10 @@ function loadContact(recordId) {
             contact.Mailing_Country || "";
 
 
+        // ------------------------------------------------
+        // IN-WIDGET SUCCESS MESSAGE
+        // ------------------------------------------------
+
         showStatus(
             "Contact information loaded.",
             "success"
@@ -432,6 +438,10 @@ saveContactButton.addEventListener(
             contactData
         );
 
+
+        // ------------------------------------------------
+        // UPDATE CONTACT
+        // ------------------------------------------------
 
         ZOHO.CRM.API.updateRecord({
 
@@ -610,7 +620,7 @@ saveContactButton.addEventListener(
 
 
             // ------------------------------------------------
-            // IN-WIDGET SUCCESS ALERT
+            // IN-WIDGET SUCCESS MESSAGE
             // ------------------------------------------------
 
             showStatus(
@@ -820,7 +830,7 @@ lookupAddressButton.addEventListener(
 
 
             // ------------------------------------------------
-            // IN-WIDGET SUCCESS ALERT
+            // IN-WIDGET SUCCESS MESSAGE
             // ------------------------------------------------
 
             showStatus(
@@ -1195,7 +1205,7 @@ saveAddressButton.addEventListener(
 
 
             // ------------------------------------------------
-            // IN-WIDGET SUCCESS ALERT
+            // IN-WIDGET SUCCESS MESSAGE
             // ------------------------------------------------
 
             showStatus(
