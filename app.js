@@ -2,6 +2,7 @@
 // ZOHO CRM CONTACT QUICK EDITOR
 // ========================================================
 
+
 // --------------------------------------------------------
 // GLOBAL VARIABLES
 // --------------------------------------------------------
@@ -128,7 +129,7 @@ function getContactId() {
 
 
 // --------------------------------------------------------
-// STATUS MESSAGE
+// STATUS MESSAGE - IN WIDGET ALERT
 // --------------------------------------------------------
 
 function showStatus(message, type) {
@@ -473,7 +474,10 @@ saveContactButton.addEventListener(
             );
 
 
-            // Check Zoho response status
+            // ------------------------------------------------
+            // CHECK ZOHO RESPONSE STATUS
+            // ------------------------------------------------
+
             if (
                 result.status &&
                 result.status.toLowerCase() !== "success"
@@ -604,10 +608,11 @@ saveContactButton.addEventListener(
 
             }
 
-   showStatus(
-                "Contact and address details saved successfully.",
-                "success"
-            );
+
+            // ------------------------------------------------
+            // IN-WIDGET SUCCESS ALERT
+            // ------------------------------------------------
+
             showStatus(
                 "Contact information saved successfully.",
                 "success"
@@ -813,6 +818,10 @@ lookupAddressButton.addEventListener(
                 }
             );
 
+
+            // ------------------------------------------------
+            // IN-WIDGET SUCCESS ALERT
+            // ------------------------------------------------
 
             showStatus(
                 "Address details found and filled automatically.",
@@ -1186,10 +1195,13 @@ saveAddressButton.addEventListener(
 
 
             // ------------------------------------------------
-            // SUCCESS
+            // IN-WIDGET SUCCESS ALERT
             // ------------------------------------------------
 
-         
+            showStatus(
+                "Address saved successfully.",
+                "success"
+            );
 
 
             console.log(
